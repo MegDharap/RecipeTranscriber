@@ -47,12 +47,4 @@ if st.button('Research Company'):
     assistant_message = query_perplexity(company_name_input, api_key)
     
     # Display the text output
-    st.text_area("Result", assistant_message, height=450)
-    
-# Custom HTML for copy button with JavaScript
-    copy_button = f'''
-    <button onclick='navigator.clipboard.writeText(`{assistant_message}`)'>
-        Copy to clipboard
-    </button>
-    '''
-    html(copy_button)
+    st.text_area("Here's the key information about the company:", assistant_message, height=750)
