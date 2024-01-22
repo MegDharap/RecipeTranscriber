@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 import json
+from streamlit.components.v1 import html
 
 # Function to call Perplexity API given a company name
 def query_perplexity(company_name, api_key):
@@ -46,9 +47,12 @@ if st.button('Research Company'):
     assistant_message = query_perplexity(company_name_input, api_key)
     
     # Display the text output
-    st.text_area("Result", assistant_message, height=150)
+    st.text_area("Result", assistant_message, height=450)
     
-    # Copy button
-    if st.button('Copy'):
-        st.experimental_set_query_params(clipboard=assistant_message)
-        st.success("Text copied to clipboard!")
+# Custom HTML for copy button with JavaScript
+    copy_button = f'''
+    <button onclick='navigator.clipboard.writeText(`{assistant_message}`)'>
+        Copy to clipboard
+    </button>
+    '''
+    html(copy_button)
