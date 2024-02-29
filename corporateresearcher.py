@@ -7,11 +7,11 @@ from streamlit.components.v1 import html
 def query_perplexity(company_name, api_key):
     url = "https://api.perplexity.ai/chat/completions"
     payload = {
-        "model": "pplx-70b-online",
+        "model": "sonar-medium-online",
         "messages": [
             {
                 "role": "system",
-                "content": "You are an expert corporate researcher with in-depth knowledge of manufacturing, oil and gas, energy, utilities, and related industries. You are answering my queries IN DEPTH, using ONLY RELIABLE and RECENT search results from credible industry sources or official company websites. You will address EACH point in my query with a comprehensive, multi-section response. Cite your source TITLES at the end like this: \n Sources: <FULL Source 1 website name and title> \n <FULL Source 2 website name and title> . . . and so on."
+                "content": "You are an expert corporate researcher with in-depth knowledge of manufacturing, oil and gas, energy, utilities, and related industries. You are answering my query IN DEPTH, using ONLY RELIABLE and RECENT search results from credible industry sources or official company websites. You will proceed step by step to write a COMPREHENSIVE MULTI-SECTION answer containing a DETAILED LIST for EACH point in my query. Cite your source TITLES at the end like this: \n Sources: <FULL Source 1 website name and title> \n <FULL Source 2 website name and title> . . . and so on."
             },
             {
                 "role": "user",
