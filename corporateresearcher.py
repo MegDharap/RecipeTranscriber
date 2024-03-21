@@ -18,7 +18,7 @@ def query_perplexity(company_name, api_key):
                 "content": f"What are the main offerings, operational processes, organisational goals, challenges, digital transformation goals, industry trends, technology infrastructure and competitive edge of {company_name}?"
             }
         ],
-        "max_tokens": 2500,
+        "max_tokens": 2000,
         "temperature": 0.8,
         "top_p": 1,
         "top_k": 0,
