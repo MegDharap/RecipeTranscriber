@@ -35,7 +35,7 @@ def query_perplexity(company_name, api_key):
     return response_data['choices'][0]['message']['content']
 
 # Streamlit UI
-st.title('TCS Corporate Researcher')
+st.title('Corporate Researcher')
 
 # Input from user
 company_name_input = st.text_input("Name the company you are researching.")
