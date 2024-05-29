@@ -35,6 +35,7 @@ def query_perplexity(company_name, api_key):
     return response_data['choices'][0]['message']['content']
 
 # Streamlit UI
+st.set_page_config(page_title="Corporate Researcher", page_icon="🔎")
 st.title('Corporate Researcher')
 
 # Input from user
