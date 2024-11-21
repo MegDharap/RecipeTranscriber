@@ -7,7 +7,7 @@ from streamlit.components.v1 import html
 def query_perplexity(COMPANY, INDUSTRY, api_key):
     url = "https://api.perplexity.ai/chat/completions"
     payload = {
-        "model": "llama-3.1-sonar-huge-128k-online",
+        "model": "llama-3.1-sonar-large-128k-online",
         "messages": [
             {
                 "role": "system",
