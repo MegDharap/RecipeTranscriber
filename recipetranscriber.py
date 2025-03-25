@@ -26,13 +26,13 @@ def get_gemini_response(URL, api_key):
                         file_uri=URL,
                         mime_type="video/*",
                     ),
-                    types.Part.from_text(text="""Accurately and carefully EXTRACT ALL the ON-SCREEN TEXT *and* the FULL RECIPE from this video, in GitHub-flavoured MARKDOWN, preserving all the timestamps and the text formatting:"""),
+                    types.Part.from_text(text="""Accurately and carefully EXTRACT ALL the ON-SCREEN TEXT *and* the FULL RECIPE from this video, in GitHub-compatible MARKDOWN, preserving all the timestamps and the text formatting:"""),
                 ],
             ),
             types.Content(
                 role="model",
                 parts=[
-                    types.Part.from_text(text="""Okay, here's the on-screen text and the full recipe, in GitHub-flavoured Markdown, with timestamps and formatting preserved:"""),
+                    types.Part.from_text(text="""Okay, here's the complete on-screen text and the full recipe, rendered using perfect Markdown syntax, with timestamps and formatting preserved:"""),
                 ],
             ),
         ]
