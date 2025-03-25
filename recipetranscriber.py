@@ -26,7 +26,7 @@ def get_gemini_response(URL, api_key):
                         file_uri=URL,
                         mime_type="video/*",
                     ),
-                    types.Part.from_text(text="""Accurately and carefully EXTRACT ALL the ON-SCREEN TEXT *and* the FULL RECIPE from this video, in a MARKDOWN TABLE, preserving all the timestamps and the text formatting:"""),
+                    types.Part.from_text(text="""Accurately and carefully EXTRACT ALL the ON-SCREEN TEXT *and* the FULL RECIPE from this video, in GitHub-flavoured MARKDOWN, preserving all the timestamps and the text formatting:"""),
                 ],
             ),
         ]
@@ -43,9 +43,10 @@ URL = st.text_input("What's the video URL?")
 
 # Button to trigger the API call
 if st.button('Get Transcript'):
-    # Call the API and get the response
-    api_key = st.secrets["GEMINI_API_KEY"]
-    assistant_message = get_gemini_response(URL, api_key)
+    with st.spinner("Analysing your video...", show_time=False):
+        # Call the API and get the response
+        api_key = st.secrets["GEMINI_API_KEY"]
+        assistant_message = get_gemini_response(URL, api_key)
     
     # Display the text output
     st.markdown(assistant_message)
