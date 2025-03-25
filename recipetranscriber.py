@@ -11,8 +11,6 @@ def get_gemini_response(URL, api_key):
     generate_content_config = types.GenerateContentConfig(
         temperature=0.2,
         top_p=0.95,
-        top_k=64,
-        max_output_tokens=8192,
         response_mime_type="text/plain",
     )
     response = client.models.generate_content(
