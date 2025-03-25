@@ -15,30 +15,32 @@ def get_gemini_response(URL, api_key):
         max_output_tokens=8192,
         response_mime_type="text/plain",
     )
-    response = client.models.generate_content(
-        model = "gemini-2.0-pro-exp-02-05",
-        config = generate_content_config,
-        contents = [
-            types.Content(
-                role="user",
-                parts=[
-                    types.Part.from_uri(
-                        file_uri=URL,
-                        mime_type="video/*",
-                    ),
-                    types.Part.from_text(text="""Accurately and carefully EXTRACT ALL the ON-SCREEN TEXT *and* the FULL RECIPE from this video, in GitHub-compatible MARKDOWN, preserving all the timestamps and the text formatting:"""),
-                ],
-            ),
-            types.Content(
-                role="model",
-                parts=[
-                    types.Part.from_text(text="""Okay, here's the complete on-screen text and the full recipe, rendered using perfect Markdown syntax, with timestamps and formatting preserved:"""),
-                ],
-            ),
-        ]
-    )
-    return(response.text)
-
+    model = "gemini-2.0-pro-exp-02-05"
+    contents = [
+        types.Content(
+            role="user",
+            parts=[
+                types.Part.from_uri(
+                    file_uri=URL,
+                    mime_type="video/*",
+                ),
+                types.Part.from_text(text="""Accurately and carefully EXTRACT ALL the ON-SCREEN TEXT *and* the FULL RECIPE from this video, in GitHub-compatible MARKDOWN, preserving all the timestamps and the text formatting:"""),
+            ],
+        ),
+        types.Content(
+            role="model",
+            parts=[
+                types.Part.from_text(text="""Okay, here's the complete on-screen text and the full recipe, rendered using perfect Markdown syntax, with timestamps and formatting preserved:"""),
+            ],
+        ),
+    ]
+    for chunk in client.models.generate_content_stream(
+        model=model,
+        contents=contents,
+        config=generate_content_config,
+    ):
+        return(chunk.text, end="")
+        
 # Streamlit UI
 st.set_page_config(page_title="Recipe Transcriber | Pepper Content", page_icon="🍽️")
 st.title('Recipe Transcriber | Pepper Content')
@@ -49,10 +51,6 @@ URL = st.text_input("What's the video URL?")
 
 # Button to trigger the API call
 if st.button('Get Transcript'):
-    with st.spinner("Analysing your video...", show_time=False):
-        # Call the API and get the response
-        api_key = st.secrets["GEMINI_API_KEY"]
-        assistant_message = get_gemini_response(URL, api_key)
-    
-    # Display the text output
-    st.markdown(assistant_message)
+    # Call the API and stream output
+    api_key = st.secrets["GEMINI_API_KEY"]
+    st.write_stream(get_gemini_response(URL, api_key))
