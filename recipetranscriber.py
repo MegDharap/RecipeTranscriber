@@ -39,7 +39,7 @@ def get_gemini_response(URL, api_key):
         contents=contents,
         config=generate_content_config,
     ):
-        return(chunk.text, end="")
+        return(chunk.text)
         
 # Streamlit UI
 st.set_page_config(page_title="Recipe Transcriber | Pepper Content", page_icon="🍽️")
