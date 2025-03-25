@@ -16,7 +16,7 @@ def get_gemini_response(URL, api_key):
         response_mime_type="text/plain",
     )
     response = client.models.generate_content(
-        model = "gemini-2.0-pro-exp-02-05",
+        model = "gemini-1.5-pro-002",
         config = generate_content_config,
         contents = [
             types.Content(
