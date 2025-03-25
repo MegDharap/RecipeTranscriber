@@ -48,4 +48,4 @@ if st.button('Get Transcript'):
     assistant_message = get_gemini_response(URL, api_key)
     
     # Display the text output
-    st.text_area(assistant_message, height=750)
+    st.markdown(assistant_message)
