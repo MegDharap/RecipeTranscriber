@@ -1,3 +1,5 @@
+# Without streaming
+
 import streamlit as st
 from google import genai
 from google.genai import types
@@ -11,10 +13,12 @@ def get_gemini_response(URL, api_key):
     generate_content_config = types.GenerateContentConfig(
         temperature=0.2,
         top_p=0.95,
+        top_k=64,
+        max_output_tokens=8192,
         response_mime_type="text/plain",
     )
     response = client.models.generate_content(
-        model = "gemini-1.5-pro-002",
+        model = "gemini-2.0-pro-exp-02-05",
         config = generate_content_config,
         contents = [
             types.Content(
@@ -53,4 +57,4 @@ if st.button('Get Transcript'):
         assistant_message = get_gemini_response(URL, api_key)
     
     # Display the text output
-    st.markdown(f"""{assistant_message}""")
+    st.markdown(assistant_message)
