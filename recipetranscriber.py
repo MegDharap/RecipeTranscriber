@@ -15,7 +15,7 @@ def get_gemini_response(URL, api_key):
         max_output_tokens=8192,
         response_mime_type="text/plain",
     )
-    model = "gemini-2.0-pro-exp-02-05",
+    model = "gemini-2.0-pro-exp-02-05"
     contents = [
         types.Content(
             role="user",
